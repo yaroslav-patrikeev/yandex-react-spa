@@ -3,3 +3,9 @@
 	background-color: var(--fill-light);
 	padding: 24px;
 }
+
+.filters {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}

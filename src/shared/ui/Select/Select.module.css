@@ -13,11 +13,32 @@
 
 .selectInput {
 	border-radius: 8px;
-	background-color: var(--fill-light);
+	border: 1px solid var(--border-input);
+	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	cursor: pointer;
+	transition: border 0.3s ease-in-out;
+}
+
+.selectInputActive {
+	border: 1px solid var(--primary);
 }
 
 .selectInputPlaceholder {
 	color: var(--text-placeholder);
+	line-height: 20px;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.selectInputCurrentItem {
+	line-height: 20px;
+	font-size: 14px;
+	font-weight: 400;
+	color: var(--text-color);
 }
 
 .selectInputIcon {
@@ -30,4 +51,27 @@
 
 .selectInputIconPassive {
 	background-image: url('../../assets/icons/arrowUp.svg');
+}
+
+.selectItems {
+	position: absolute;
+	top: 44px;
+	left: 0;
+	width: 360px;
+	max-height: 0px;
+	overflow: hidden;
+	border-radius: 8px;
+	background-color: var(--fill-light);
+	display: flex;
+	transition: max-height 0.3s ease-in-out;
+	flex-direction: column;
+	z-index: 999;
+}
+
+.selectItem {
+	padding: 12px 12px 10px 12px;
+}
+
+.selectItemsOpened {
+	max-height: 999px;
 }
