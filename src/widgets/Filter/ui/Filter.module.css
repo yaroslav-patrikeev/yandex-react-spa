@@ -1,0 +1,5 @@
+.filterSection {
+	border-radius: 8px;
+	background-color: var(--fill-light);
+	padding: 24px;
+}

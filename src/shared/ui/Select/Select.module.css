@@ -1,0 +1,33 @@
+.select {
+	width: 360px;
+}
+
+.selectTitle {
+}
+
+.selectInput {
+}
+
+.selectDecription {
+}
+
+.selectInput {
+	border-radius: 8px;
+	background-color: var(--fill-light);
+}
+
+.selectInputPlaceholder {
+	color: var(--text-placeholder);
+}
+
+.selectInputIcon {
+	width: 17.92px;
+	height: 17.92px;
+}
+.selectInputIconActive {
+	background-image: url('../../assets/icons/arrowDown.svg');
+}
+
+.selectInputIconPassive {
+	background-image: url('../../assets/icons/arrowUp.svg');
+}
