@@ -14,12 +14,16 @@
 	--text-placeholder: #999fa6;
 	--border-input: #e1e3e6;
 	--text-color: #1b1f23;
+	--text-point: #ababab;
+	--active-text: #000000;
+	--fill-pagination-disabled: #e9eaed;
 }
 
 #root {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 100vh;
+	min-height: 100vh;
 	background-color: var(--fill-body);
+	color: var(--text-color);
 }

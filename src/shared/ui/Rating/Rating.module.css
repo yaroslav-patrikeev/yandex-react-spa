@@ -1,0 +1,7 @@
+.rating {
+	display: flex;
+	gap: 8px;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+}

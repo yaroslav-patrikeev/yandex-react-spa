@@ -1,0 +1,42 @@
+.ticketCard {
+	border-radius: 8px;
+	background-color: var(--fill-light);
+	padding: 24px;
+	display: flex;
+	align-items: flex-start;
+	gap: 24px;
+	max-width: 1424px;
+}
+
+.image {
+	width: 100px;
+	height: 120px;
+	border-radius: 8px;
+}
+
+.description {
+	display: grid;
+	grid-template-columns: 90px auto;
+	font-size: 14px;
+	line-height: 20px;
+	row-gap: 12px;
+}
+
+.point {
+	color: var(--text-point);
+}
+
+.title {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 20px;
+	margin: 0 0 16px;
+}
+
+.descriptionPoint {
+	width: 600px;
+}
+
+.centralBlock {
+	width: 100%;
+}

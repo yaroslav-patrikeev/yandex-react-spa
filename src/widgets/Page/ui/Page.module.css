@@ -1,3 +1,6 @@
 .main {
-	margin: 32px 20px 0;
+	margin: 32px 20px 24px;
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
 }

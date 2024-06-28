@@ -3,12 +3,10 @@
 }
 
 .selectTitle {
-}
-
-.selectInput {
-}
-
-.selectDecription {
+	margin-bottom: 4px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
 }
 
 .selectInput {
@@ -42,8 +40,8 @@
 }
 
 .selectInputIcon {
-	width: 17.92px;
-	height: 17.92px;
+	width: 18px;
+	height: 18px;
 }
 .selectInputIconActive {
 	background-image: url('../../assets/icons/arrowDown.svg');
@@ -65,7 +63,10 @@
 	display: flex;
 	transition: max-height 0.3s ease-in-out;
 	flex-direction: column;
-	z-index: 999;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
 }
 
 .selectItem {

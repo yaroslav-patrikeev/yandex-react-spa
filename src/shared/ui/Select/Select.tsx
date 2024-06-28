@@ -43,21 +43,22 @@ export default function Select(params: ISelectParams) {
 							: styles.selectInputIconPassive
 					)}
 				></div>
-				<div
+				<ul
 					className={classNames(
 						styles.selectItems,
 						activeArrow && styles.selectItemsOpened
 					)}
 				>
-					{items.map(item => (
-						<div
+					{items.map((item, i) => (
+						<li
+							key={i}
 							className={styles.selectItem}
 							onClick={() => setCurrentItem(item)}
 						>
 							{item}
-						</div>
+						</li>
 					))}
-				</div>
+				</ul>
 			</div>
 		</div>
 	);

@@ -1,0 +1,15 @@
+export const allGenres = {
+	['не выбран']: null,
+	['комедия']: 'comedy',
+	['драма']: 'drama',
+	['боевик']: 'action',
+	['триллер']: 'thriller',
+	['ужасы']: 'horror',
+	['семейный']: 'family',
+	['анимированный']: 'cartoon',
+	['фэнтези']: 'fantasy',
+	['романтика']: 'romance',
+	['приключения']: 'adventure',
+	['мьюзикл']: 'musical',
+	['военный']: 'war',
+} as const;
