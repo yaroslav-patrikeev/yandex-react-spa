@@ -11,13 +11,15 @@ export default function Pagination() {
 	const pageNumber = useAppSelector(
 		(state: RootState) => state.main.pageNumber
 	);
-	const totalPage = useAppSelector((state: RootState) => state.main.totalPage);
+	const searchResponse = useAppSelector(
+		(state: RootState) => state.main.searchResponse
+	);
 	const dispatch = useAppDispatch();
-	const [getData, data] = useLazySearchRequestQuery();
+	const [getData] = useLazySearchRequestQuery();
 	return (
 		<Paginator
 			pageNumber={pageNumber}
-			totalPages={data?.data?.total_pages || totalPage}
+			totalPages={searchResponse.total_pages}
 			changePage={(number: number) => {
 				dispatch(updatePageNumber(number));
 				getData({ page: String(number) });

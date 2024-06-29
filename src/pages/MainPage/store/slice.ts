@@ -10,16 +10,23 @@ interface IRating {
 export interface MainState {
 	ratings: IRating[];
 	pageNumber: number;
-	totalPage: number;
-	searchRequest: string;
+	searchRequest: ISearchRequest;
 	searchResponse: ISearchNormalizedResponse;
+}
+
+export interface ISearchRequest {
+	title?: string;
+	genre?: string;
+	release_year?: string;
+	page?: string;
 }
 
 const initialState: MainState = {
 	ratings: [],
 	pageNumber: 1,
-	totalPage: 1,
-	searchRequest: '',
+	searchRequest: {
+		page: '1',
+	},
 	searchResponse: {
 		search_result: [],
 		total_pages: 1,
@@ -51,10 +58,7 @@ export const mainSlice = createSlice({
 		updatePageNumber: (state, action: PayloadAction<number>) => {
 			state.pageNumber = action.payload;
 		},
-		updateTotalPage: (state, action: PayloadAction<number>) => {
-			state.totalPage = action.payload;
-		},
-		updateSearchRequest: (state, action: PayloadAction<string>) => {
+		updateSearchRequest: (state, action: PayloadAction<ISearchRequest>) => {
 			state.searchRequest = action.payload;
 		},
 	},
@@ -63,7 +67,6 @@ export const mainSlice = createSlice({
 export const {
 	setRating,
 	updatePageNumber,
-	updateTotalPage,
 	updateSearchRequest,
 	updateSearchResponse,
 } = mainSlice.actions;

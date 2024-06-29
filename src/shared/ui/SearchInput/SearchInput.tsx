@@ -1,3 +1,4 @@
+import { ISearchRequest } from '@/pages/MainPage/store/slice';
 import classNames from 'classnames';
 import { useState } from 'react';
 import styles from './SearchInput.module.css';
@@ -5,7 +6,7 @@ export default function SearchInput({
 	searchRequest,
 	updateRequest,
 }: {
-	searchRequest: string;
+	searchRequest: ISearchRequest;
 	updateRequest: (str: string) => void;
 }) {
 	const [isHover, setIsHover] = useState<boolean>(false);
@@ -39,10 +40,10 @@ export default function SearchInput({
 			<input
 				type='text'
 				className={styles.input}
-				value={searchRequest}
+				value={searchRequest.title}
 				onChange={evt => updateRequest(evt.target.value)}
 			></input>
-			{searchRequest.length > 0 && (
+			{searchRequest.title && searchRequest.title.length > 0 && (
 				<button
 					className={styles.closeIcon}
 					onClick={() => {

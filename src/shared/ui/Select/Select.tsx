@@ -1,20 +1,39 @@
+import { FilterType } from '@/widgets/Filter/constants/constants';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Select.module.css';
 
 interface ISelectParams {
 	title: string;
-	items: string[];
+	items: Record<string, string>;
 	placeholder?: string;
 	isRequired?: boolean;
 	showIcon?: boolean;
+	paramNames: Record<string, FilterType>;
+	addQueryParams: (str: string) => void;
+	currentValue: ({ filterType }: { filterType: FilterType }) => string | null;
+	sendToStore: (param: { filterType: string; value: string }) => void;
 }
 
 export default function Select(params: ISelectParams) {
 	const [activeArrow, setActiveArrow] = useState<boolean>(false);
 	const [currentItem, setCurrentItem] = useState<null | string>(null);
 
-	const { title, isRequired, showIcon, placeholder, items } = params;
+	const {
+		title,
+		isRequired,
+		showIcon,
+		placeholder,
+		items,
+		paramNames,
+		addQueryParams,
+		currentValue,
+		sendToStore,
+	} = params;
+
+	useEffect(() => {
+		setCurrentItem(currentValue({ filterType: paramNames[title] }));
+	}, [paramNames, title, currentValue]);
 	return (
 		<div className={styles.select}>
 			<div className={styles.selectTitle}>
@@ -49,13 +68,20 @@ export default function Select(params: ISelectParams) {
 						activeArrow && styles.selectItemsOpened
 					)}
 				>
-					{items.map((item, i) => (
+					{Object.entries(items).map((item, i) => (
 						<li
 							key={i}
 							className={styles.selectItem}
-							onClick={() => setCurrentItem(item)}
+							onClick={() => {
+								setCurrentItem(item[1]);
+								addQueryParams(`${paramNames[title]}=${item[0]}`);
+								sendToStore({
+									filterType: paramNames[title],
+									value: item[0],
+								});
+							}}
 						>
-							{item}
+							{item[1]}
 						</li>
 					))}
 				</ul>

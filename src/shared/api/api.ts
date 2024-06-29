@@ -2,6 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export interface ISearchParams {
 	title?: string;
 	page?: string;
+	genre?: string;
+	release_year?: string;
 }
 
 interface ISearchResponse {
@@ -34,9 +36,9 @@ export const api = createApi({
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3030' }),
 	endpoints: builder => ({
 		searchRequest: builder.query<ISearchNormalizedResponse, ISearchParams>({
-			query: ({ title, page }) => ({
+			query: ({ title, page, genre, release_year }) => ({
 				url: '/api/v1/search',
-				params: { title, page },
+				params: { title, page, genre, release_year },
 			}),
 			transformResponse: (response: ISearchResponse) => {
 				return {
