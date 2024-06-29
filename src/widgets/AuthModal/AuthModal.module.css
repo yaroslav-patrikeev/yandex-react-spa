@@ -1,0 +1,32 @@
+.header {
+	width: 296px;
+	margin-bottom: 24px;
+}
+
+.modal {
+	position: relative;
+	border-radius: 8px;
+	background-color: var(--fill-light);
+	padding: 24px;
+	z-index: 5;
+	color: var(--text-color);
+}
+
+.title {
+	font-size: 20px;
+	line-height: 20px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+}

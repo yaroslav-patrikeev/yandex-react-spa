@@ -17,6 +17,7 @@
 	--text-point: #ababab;
 	--active-text: #000000;
 	--fill-pagination-disabled: #e9eaed;
+	--required-star: #f04075;
 }
 
 #root {

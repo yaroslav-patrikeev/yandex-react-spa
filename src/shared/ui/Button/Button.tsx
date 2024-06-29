@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { ButtonHTMLAttributes } from 'react';
 import styles from './Button.module.css';
 
 const availableTheme = {
@@ -7,16 +6,18 @@ const availableTheme = {
 	empty: 'buttonEmpty',
 };
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps {
 	text: string;
-	theme: 'filled' | 'empty';
+	onClick?: VoidFunction;
+	theme?: 'filled' | 'empty';
 }
 
 export default function Button(props: IButtonProps) {
-	const { text, theme } = props;
+	const { text, theme = 'filled', onClick } = props;
 	return (
 		<button
 			className={classNames(styles[availableTheme[theme]], styles.button)}
+			onClick={onClick}
 		>
 			{text}
 		</button>

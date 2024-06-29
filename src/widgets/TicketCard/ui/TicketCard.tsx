@@ -1,3 +1,5 @@
+import { RootState } from '@/app/providers/store';
+import { useAppSelector } from '@/shared/hooks/storeHooks';
 import Rating from '../../../shared/ui/Rating/Rating';
 import styles from './TicketCard.module.css';
 
@@ -11,6 +13,9 @@ interface ITicketCardProps {
 
 export default function TicketCard(props: ITicketCardProps) {
 	const { title, release_year, genre, description, id } = props;
+	const isAuthorized =
+		!!useAppSelector((state: RootState) => state.user.token) ||
+		!!localStorage.getItem('token');
 	return (
 		<article className={styles.ticketCard}>
 			<img
@@ -32,7 +37,7 @@ export default function TicketCard(props: ITicketCardProps) {
 					<span className={styles.descriptionPoint}>{description}</span>
 				</div>
 			</div>
-			<Rating id={id} />
+			{isAuthorized && <Rating id={id} />}
 		</article>
 	);
 }
