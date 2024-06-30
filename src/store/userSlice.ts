@@ -1,6 +1,6 @@
+import { login } from '@/entities/User/services/login';
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/react';
-import { login } from './login';
 
 interface IInitialState {
 	token: string | null;

@@ -1,6 +1,8 @@
-import { RootState } from '@/app/providers/store';
+import { RootState } from '@/providers/store';
 import { useAppSelector } from '@/shared/hooks/storeHooks';
 import Rating from '@/shared/ui/Rating/Rating';
+import Image from 'next/image';
+import { __API_URL__ } from '../../../env';
 import styles from './FilmCard.module.css';
 
 interface IFilmCardProps {
@@ -19,9 +21,11 @@ export default function FilmCard(props: IFilmCardProps) {
 		!!localStorage.getItem('token');
 	return (
 		<section className={styles.filmCard}>
-			<img
+			<Image
 				src={`${__API_URL__}/static/images/${id}`}
-				alt=''
+				alt={title}
+				width={400}
+				height={500}
 				className={styles.image}
 			/>
 			<div>

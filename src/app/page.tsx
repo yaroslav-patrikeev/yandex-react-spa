@@ -1,7 +1,9 @@
-import { RootState } from '@/app/providers/store';
+'use client';
+
 import Pagination from '@/features/Pagination/Pagination';
-import Search from '@/features/Search/Search.tsx';
+import Search from '@/features/Search/Search';
 import SetFilters from '@/features/SetFilters/SetFilters';
+import { RootState } from '@/providers/store';
 import { useLazySearchRequestQuery } from '@/shared/api/api';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
 import FilmsNotFound from '@/widgets/FIlmsNotFound/FilmsNotFound';
@@ -18,8 +20,8 @@ import {
 	setRating,
 	updateSearchRequest,
 	updateSearchResponse,
-} from '../store/slice';
-import styles from './MainPage.module.css';
+} from '../store/mainSlice';
+import styles from './page.module.css';
 
 export default function MainPage() {
 	const pageNumber = useAppSelector(
@@ -80,7 +82,7 @@ export default function MainPage() {
 
 	useEffect(() => {
 		if (isError) {
-			alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+			console.error('Возникла ошибка. Попробуйте перезагрузить страницу.');
 		}
 	}, [isError]);
 

@@ -1,16 +1,13 @@
-import { RootState } from '@/app/providers/store.tsx';
+import { RootState } from '@/providers/store.jsx';
+import { useLazySearchRequestQuery } from '@/shared/api/api';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+import SearchInput from '@/shared/ui/SearchInput/SearchInput';
 import {
 	setIsLoad,
 	updatePageNumber,
 	updateSearchResponse,
-} from '@/pages/MainPage/store/slice.ts';
-import { useLazySearchRequestQuery } from '@/shared/api/api.ts';
-import SearchInput from '@/shared/ui/SearchInput/SearchInput.tsx';
+} from '@/store/mainSlice';
 import { useEffect } from 'react';
-import {
-	useAppDispatch,
-	useAppSelector,
-} from '../../shared/hooks/storeHooks.ts';
 
 export default function Search() {
 	const searchRequest = useAppSelector(

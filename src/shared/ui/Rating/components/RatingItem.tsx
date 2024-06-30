@@ -1,13 +1,10 @@
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+import { setRating } from '@/store/mainSlice';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { RootState } from '../../../../app/providers/store';
-import { setRating } from '../../../../pages/MainPage/store/slice.ts';
-import {
-	useAppDispatch,
-	useAppSelector,
-} from '../../../../shared/hooks/storeHooks.ts';
-import EmptyStar from './EmptyStar.tsx';
-import FilledStar from './FilledStar.tsx';
+import { RootState } from '../../../../providers/store';
+import EmptyStar from './EmptyStar';
+import FilledStar from './FilledStar';
 import styles from './RatingItem.module.css';
 
 interface IRatingItem {

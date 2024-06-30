@@ -1,6 +1,8 @@
-import { RootState } from '@/app/providers/store';
+import { RootState } from '@/providers/store';
 import { useAppSelector } from '@/shared/hooks/storeHooks';
-import { useNavigate } from 'react-router-dom';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { __API_URL__ } from '../../../../env';
 import Rating from '../../../shared/ui/Rating/Rating';
 import styles from './TicketCard.module.css';
 
@@ -17,18 +19,21 @@ export default function TicketCard(props: ITicketCardProps) {
 	const isAuthorized =
 		!!useAppSelector((state: RootState) => state.user.token) ||
 		!!localStorage.getItem('token');
-	const navigate = useNavigate();
+	const router = useRouter();
 	return (
 		<article
 			className={styles.ticketCard}
 			onClick={() => {
-				navigate(`/films/${id}`);
+				router.push(`/films/${id}`);
 			}}
 		>
-			<img
+			<Image
 				src={`${__API_URL__}/static/images/${id}`}
 				alt={title}
 				className={styles.image}
+				width={100}
+				height={120}
+				loading='lazy'
 			/>
 			<div className={styles.centralBlock}>
 				<div>

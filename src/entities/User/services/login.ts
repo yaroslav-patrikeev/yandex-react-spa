@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { __API_URL__ } from '../../../../env';
 
 export const login = createAsyncThunk(
 	'login',

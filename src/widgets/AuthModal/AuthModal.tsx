@@ -1,8 +1,8 @@
 import { login } from '@/entities/User/services/login';
-import { showAuthModal } from '@/entities/User/services/slice';
 import { useAppDispatch } from '@/shared/hooks/storeHooks';
 import Button from '@/shared/ui/Button/Button';
 import Input from '@/shared/ui/Input/Input';
+import { showAuthModal } from '@/store/userSlice';
 import React, { useState } from 'react';
 import styles from './AuthModal.module.css';
 

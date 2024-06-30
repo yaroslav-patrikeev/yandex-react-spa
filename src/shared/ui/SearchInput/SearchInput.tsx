@@ -1,9 +1,6 @@
-import {
-	ISearchRequest,
-	updateSearchRequest,
-} from '@/pages/MainPage/store/slice';
-import { debounce } from '@/shared/helpers/debounce.ts';
+import { debounce } from '@/shared/helpers/debounce';
 import { useAppDispatch } from '@/shared/hooks/storeHooks';
+import { ISearchRequest, updateSearchRequest } from '@/store/mainSlice';
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
 import styles from './SearchInput.module.css';
