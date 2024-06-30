@@ -1,0 +1,64 @@
+.filmCard {
+	border-radius: 8px;
+	background-color: var(--fill-light);
+	width: 100%;
+	box-sizing: border-box;
+	max-width: 1856px;
+	min-height: 553px;
+	display: flex;
+	gap: 32px;
+	padding: 24px 24px 29px;
+}
+
+.image {
+	width: 400px;
+	height: 500px;
+	border-radius: 8px;
+}
+
+.titleBlock {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: 32px;
+	margin: 0 0 36px;
+	font-weight: 600;
+}
+
+.description {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.point {
+	margin: 0;
+	font-size: 20px;
+	line-height: 24px;
+	font-weight: 400;
+}
+
+.key {
+	font-weight: 600;
+	margin-right: 8px;
+}
+
+.descriptionKey {
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.textDescription {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.blockTextDescription {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}

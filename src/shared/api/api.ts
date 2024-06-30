@@ -31,6 +31,28 @@ export interface ISearchNormalizedResponse {
 	total_pages: number;
 }
 
+interface IGetMovieResponse {
+	id: string;
+	title: string;
+	description: string;
+	genre: string;
+	release_year: number;
+	actors: { name: string; photo: string }[];
+	rating: string;
+	total_rates_count: string;
+	poster: string;
+}
+
+export interface IGetMovieNormalizedResponse {
+	id: string;
+	title: string;
+	description: string;
+	genre: string;
+	release_year: number;
+	rating: string;
+	actors: { name: string; photo: string }[];
+}
+
 export const api = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3030' }),
@@ -55,8 +77,24 @@ export const api = createApi({
 				};
 			},
 		}),
+		getFilm: builder.query<IGetMovieNormalizedResponse, { id: string }>({
+			query: ({ id }) => ({
+				url: `/api/v1/movie/${id}`,
+			}),
+			transformResponse: (response: IGetMovieResponse) => {
+				return {
+					id: response.id,
+					title: response.title,
+					description: response.description,
+					genre: response.genre,
+					release_year: response.release_year,
+					rating: response.rating,
+					actors: response.actors,
+				};
+			},
+		}),
 	}),
 });
 
-export const useSearchRequestQuery = api.useSearchRequestQuery;
 export const useLazySearchRequestQuery = api.useLazySearchRequestQuery;
+export const useLazyGetFilmQuery = api.useLazyGetFilmQuery;

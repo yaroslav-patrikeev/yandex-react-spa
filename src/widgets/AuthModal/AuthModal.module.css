@@ -10,6 +10,7 @@
 	padding: 24px;
 	z-index: 5;
 	color: var(--text-color);
+	margin-top: 200px;
 }
 
 .title {

@@ -71,6 +71,9 @@
 
 .selectItem {
 	padding: 12px 12px 10px 12px;
+	&:hover {
+		background-color: var(--select-hover);
+	}
 }
 
 .selectItemsOpened {
