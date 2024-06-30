@@ -1,10 +1,7 @@
-import { RootState } from '../../app/providers/store';
-import { updatePageNumber } from '../../pages/MainPage/store/slice.ts';
-import { useLazySearchRequestQuery } from '../../shared/api/api.ts';
-import {
-	useAppDispatch,
-	useAppSelector,
-} from '../../shared/hooks/storeHooks.ts';
+import { useLazySearchRequestQuery } from '@/shared/api/api';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+import { updatePageNumber } from '@/store/mainSlice';
+import { RootState } from '../../providers/store';
 import Paginator from '../../shared/ui/Paginator/Paginator';
 
 export default function Pagination() {

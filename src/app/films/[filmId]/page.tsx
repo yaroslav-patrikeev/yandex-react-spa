@@ -1,3 +1,5 @@
+'use client';
+
 import {
 	IGetMovieNormalizedResponse,
 	useLazyGetFilmQuery,
@@ -5,11 +7,16 @@ import {
 import Carousel from '@/shared/ui/Carousel/Carousel';
 import FilmCard from '@/widgets/FilmCard/FilmCard';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import styles from './FilmPage.module.css';
+import styles from './page.module.css';
 
-export default function FilmPage() {
-	const { filmId } = useParams();
+interface IParams {
+	params: {
+		filmId: string;
+	};
+}
+
+export default function Page({ params }: IParams) {
+	const filmId = params.filmId;
 	const [getFilm, { data, isFetching, isError }] = useLazyGetFilmQuery();
 	const [response, setResponse] = useState<IGetMovieNormalizedResponse>();
 	useEffect(() => {

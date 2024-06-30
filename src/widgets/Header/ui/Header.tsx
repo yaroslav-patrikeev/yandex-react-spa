@@ -1,10 +1,12 @@
-import { RootState } from '@/app/providers/store';
-import { logout, showAuthModal } from '@/entities/User/services/slice';
+'use client';
+
 import Modal from '@/features/Modal/Modal';
+import { RootState } from '@/providers/store';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+import { logout, showAuthModal } from '@/store/userSlice';
 import AuthModal from '@/widgets/AuthModal/AuthModal';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '../../../shared/ui/Button/Button';
 import styles from './Header.module.css';
 
@@ -15,7 +17,7 @@ export default function Header() {
 	);
 	const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
-	const navigate = useNavigate();
+	const router = useRouter();
 	useEffect(() => {
 		const isToken = !!localStorage.getItem('token') || !!token;
 		setIsAuthorized(isToken);
@@ -29,7 +31,7 @@ export default function Header() {
 				<h1
 					className={styles.title}
 					onClick={() => {
-						navigate('/');
+						router.push('/');
 					}}
 				>
 					Фильмопоиск

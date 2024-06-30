@@ -1,12 +1,12 @@
-import { RootState } from '@/app/providers/store';
+import { RootState } from '@/providers/store';
+import { useLazySearchRequestQuery } from '@/shared/api/api';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
 import {
 	setIsLoad,
 	updatePageNumber,
 	updateSearchRequest,
 	updateSearchResponse,
-} from '@/pages/MainPage/store/slice';
-import { useLazySearchRequestQuery } from '@/shared/api/api';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+} from '@/store/mainSlice';
 import {
 	FilterType,
 	GenreKeys,
@@ -14,17 +14,17 @@ import {
 	filters,
 } from '@/widgets/Filter/constants/constants';
 import Filter from '@/widgets/Filter/ui/Filter';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default function SetFilters() {
-	const navigate = useNavigate();
 	const [params, setParams] = useState<string[]>([]);
 	const dispatch = useAppDispatch();
 	const [getData, { isLoading, isError }] = useLazySearchRequestQuery();
 	const searchRequest = useAppSelector(
 		(state: RootState) => state.main.searchRequest
 	);
+	const router = useRouter();
 	useEffect(() => {
 		dispatch(setIsLoad(isLoading));
 	}, [dispatch, isLoading]);
@@ -72,10 +72,7 @@ export default function SetFilters() {
 			newParams = paramsWithoutFilter;
 		}
 		setParams(newParams);
-		navigate({
-			pathname: window.location.pathname,
-			search: `?${newParams.join('&')}`,
-		});
+		router.replace(`/?${newParams.join('&')}`, { scroll: true });
 	};
 
 	const currentValue = ({
