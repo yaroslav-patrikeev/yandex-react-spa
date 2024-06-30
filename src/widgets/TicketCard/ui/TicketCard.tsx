@@ -1,5 +1,6 @@
 import { RootState } from '@/app/providers/store';
 import { useAppSelector } from '@/shared/hooks/storeHooks';
+import { useNavigate } from 'react-router-dom';
 import Rating from '../../../shared/ui/Rating/Rating';
 import styles from './TicketCard.module.css';
 
@@ -16,8 +17,14 @@ export default function TicketCard(props: ITicketCardProps) {
 	const isAuthorized =
 		!!useAppSelector((state: RootState) => state.user.token) ||
 		!!localStorage.getItem('token');
+	const navigate = useNavigate();
 	return (
-		<article className={styles.ticketCard}>
+		<article
+			className={styles.ticketCard}
+			onClick={() => {
+				navigate(`/films/${id}`);
+			}}
+		>
 			<img
 				src={`${__API_URL__}/static/images/${id}`}
 				alt={title}

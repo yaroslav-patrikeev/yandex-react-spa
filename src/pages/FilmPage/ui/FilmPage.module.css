@@ -1,6 +1,10 @@
 .filmPage {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	max-width: 1856px;
+	padding: 20px 32px 74px;
+	box-sizing: border-box;
 }
 
 .actorsTitle {

@@ -1,5 +1,6 @@
 import { RootState } from '@/app/providers/store';
 import {
+	setIsLoad,
 	updatePageNumber,
 	updateSearchRequest,
 	updateSearchResponse,
@@ -13,17 +14,24 @@ import {
 	filters,
 } from '@/widgets/Filter/constants/constants';
 import Filter from '@/widgets/Filter/ui/Filter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SetFilters() {
 	const navigate = useNavigate();
 	const [params, setParams] = useState<string[]>([]);
 	const dispatch = useAppDispatch();
-	const [getData] = useLazySearchRequestQuery();
+	const [getData, { isLoading, isError }] = useLazySearchRequestQuery();
 	const searchRequest = useAppSelector(
 		(state: RootState) => state.main.searchRequest
 	);
+	useEffect(() => {
+		dispatch(setIsLoad(isLoading));
+	}, [dispatch, isLoading]);
+
+	useEffect(() => {
+		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+	}, [isError]);
 
 	const sendToStore = (param: { filterType: string; value: string }) => {
 		let newRequest: Record<string, string> = {};

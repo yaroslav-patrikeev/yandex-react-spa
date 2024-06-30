@@ -1,5 +1,6 @@
+import SetRating from '@/features/SetRating/SetRating';
+import React from 'react';
 import styles from './Rating.module.css';
-import RatingItem from './components/RatingItem';
 
 export default function Rating({ id }: { id: string }) {
 	return (
@@ -7,7 +8,9 @@ export default function Rating({ id }: { id: string }) {
 			{Array(5)
 				.fill(null)
 				.map((_, i) => (
-					<RatingItem key={i} index={i} id={id} />
+					<React.Fragment key={i}>
+						<SetRating index={i} id={id} />
+					</React.Fragment>
 				))}
 		</div>
 	);

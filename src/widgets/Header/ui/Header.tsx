@@ -4,6 +4,7 @@ import Modal from '@/features/Modal/Modal';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
 import AuthModal from '@/widgets/AuthModal/AuthModal';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../shared/ui/Button/Button';
 import styles from './Header.module.css';
 
@@ -14,6 +15,7 @@ export default function Header() {
 	);
 	const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	useEffect(() => {
 		const isToken = !!localStorage.getItem('token') || !!token;
 		setIsAuthorized(isToken);
@@ -24,7 +26,14 @@ export default function Header() {
 	return (
 		<header className={styles.wrapper}>
 			<div className={styles.header}>
-				<h1 className={styles.title}>Фильмопоиск</h1>
+				<h1
+					className={styles.title}
+					onClick={() => {
+						navigate('/');
+					}}
+				>
+					Фильмопоиск
+				</h1>
 				{isAuthorized ? (
 					<div className={styles.authBar}>
 						<div className={styles.profileIcon}></div>

@@ -6,14 +6,17 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from '../../../../shared/hooks/storeHooks.ts';
+import EmptyStar from './EmptyStar.tsx';
+import FilledStar from './FilledStar.tsx';
 import styles from './RatingItem.module.css';
 
 interface IRatingItem {
 	index: number;
 	id: string;
+	onRating: (movieId: string, user_rate: number, token: string | null) => void;
 }
 
-export default function RatingItem({ index, id }: IRatingItem) {
+export default function RatingItem({ index, id, onRating }: IRatingItem) {
 	const [isHover, setIsHover] = useState(false);
 	const rating =
 		useAppSelector((state: RootState) => state.main.ratings).find(
@@ -29,19 +32,20 @@ export default function RatingItem({ index, id }: IRatingItem) {
 			onMouseLeave={() => {
 				setIsHover(false);
 			}}
-			onClick={() => {
+			onClick={(evt: React.MouseEvent) => {
+				evt.stopPropagation();
+				onRating(id, index + 1, localStorage.getItem('token'));
 				dispatch(setRating({ id, rating: index + 1 }));
 				setIsHover(false);
 			}}
 		>
-			<div
-				className={classNames(
-					!isHover && index + 1 <= rating
-						? styles.activeStar
-						: styles.passiveStar,
-					isHover && styles.hoverStar
-				)}
-			></div>
+			{!isHover && index + 1 > rating ? (
+				<EmptyStar />
+			) : !isHover && index + 1 <= rating ? (
+				<FilledStar state='active' />
+			) : (
+				<FilledStar state='hover' />
+			)}
 			<span
 				className={index + 1 <= rating ? styles.activeText : styles.passiveText}
 			>

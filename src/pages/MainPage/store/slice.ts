@@ -12,6 +12,7 @@ export interface MainState {
 	pageNumber: number;
 	searchRequest: ISearchRequest;
 	searchResponse: ISearchNormalizedResponse;
+	isLoading: boolean;
 }
 
 export interface ISearchRequest {
@@ -31,6 +32,7 @@ const initialState: MainState = {
 		search_result: [],
 		total_pages: 1,
 	},
+	isLoading: false,
 };
 
 export const mainSlice = createSlice({
@@ -61,6 +63,9 @@ export const mainSlice = createSlice({
 		updateSearchRequest: (state, action: PayloadAction<ISearchRequest>) => {
 			state.searchRequest = action.payload;
 		},
+		setIsLoad: (state, action: PayloadAction<boolean>) => {
+			state.isLoading = action.payload;
+		},
 	},
 });
 
@@ -69,6 +74,7 @@ export const {
 	updatePageNumber,
 	updateSearchRequest,
 	updateSearchResponse,
+	setIsLoad,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

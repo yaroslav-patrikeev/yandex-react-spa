@@ -56,6 +56,7 @@ export interface IGetMovieNormalizedResponse {
 export const api = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3030' }),
+	tagTypes: ['movie'],
 	endpoints: builder => ({
 		searchRequest: builder.query<ISearchNormalizedResponse, ISearchParams>({
 			query: ({ title, page, genre, release_year }) => ({
@@ -92,9 +93,23 @@ export const api = createApi({
 					actors: response.actors,
 				};
 			},
+			providesTags: ['movie'],
+		}),
+		setRating: builder.mutation({
+			query: ({ movieId, user_rate, token }) => ({
+				url: '/api/v1/rateMovie',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+				body: { movieId, user_rate },
+				method: 'POST',
+			}),
+			invalidatesTags: ['movie'],
 		}),
 	}),
 });
 
 export const useLazySearchRequestQuery = api.useLazySearchRequestQuery;
 export const useLazyGetFilmQuery = api.useLazyGetFilmQuery;
+export const useSetRatingMutation = api.useSetRatingMutation;

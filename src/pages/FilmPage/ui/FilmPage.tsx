@@ -2,6 +2,7 @@ import {
 	IGetMovieNormalizedResponse,
 	useLazyGetFilmQuery,
 } from '@/shared/api/api';
+import Carousel from '@/shared/ui/Carousel/Carousel';
 import FilmCard from '@/widgets/FilmCard/FilmCard';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -9,7 +10,7 @@ import styles from './FilmPage.module.css';
 
 export default function FilmPage() {
 	const { filmId } = useParams();
-	const [getFilm, { data, isFetching }] = useLazyGetFilmQuery();
+	const [getFilm, { data, isFetching, isError }] = useLazyGetFilmQuery();
 	const [response, setResponse] = useState<IGetMovieNormalizedResponse>();
 	useEffect(() => {
 		if (filmId) {
@@ -21,13 +22,15 @@ export default function FilmPage() {
 		if (data && !isFetching) setResponse(data);
 	}, [data, isFetching]);
 
+	useEffect(() => {
+		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+	}, [isError]);
+
 	return (
-		<div className={styles.filmPage}>
+		<main className={styles.filmPage}>
 			{response && <FilmCard {...response} />}
 			<h3 className={styles.actorsTitle}>Актеры</h3>
-			{response?.actors.map(actor => (
-				<img src={actor.photo} width={'160px'} />
-			))}
-		</div>
+			{response && <Carousel step={600} actors={response.actors} />}
+		</main>
 	);
 }

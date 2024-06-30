@@ -16,6 +16,7 @@ export default function Pagination() {
 	);
 	const dispatch = useAppDispatch();
 	const [getData] = useLazySearchRequestQuery();
+
 	return (
 		<Paginator
 			pageNumber={pageNumber}

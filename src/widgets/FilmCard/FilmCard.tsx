@@ -1,3 +1,5 @@
+import { RootState } from '@/app/providers/store';
+import { useAppSelector } from '@/shared/hooks/storeHooks';
 import Rating from '@/shared/ui/Rating/Rating';
 import styles from './FilmCard.module.css';
 
@@ -12,6 +14,9 @@ interface IFilmCardProps {
 
 export default function FilmCard(props: IFilmCardProps) {
 	const { title, release_year, genre, rating, description, id } = props;
+	const isAuthorized =
+		!!useAppSelector((state: RootState) => state.user.token) ||
+		!!localStorage.getItem('token');
 	return (
 		<section className={styles.filmCard}>
 			<img
@@ -22,7 +27,7 @@ export default function FilmCard(props: IFilmCardProps) {
 			<div>
 				<div className={styles.titleBlock}>
 					<h2 className={styles.title}>{title}</h2>
-					<Rating id={id} />
+					{isAuthorized && <Rating id={id} />}
 				</div>
 
 				<div className={styles.description}>

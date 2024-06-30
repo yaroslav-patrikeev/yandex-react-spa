@@ -6,6 +6,7 @@
 	align-items: flex-start;
 	gap: 24px;
 	max-width: 1424px;
+	cursor: pointer;
 }
 
 .image {

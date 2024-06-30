@@ -1,6 +1,11 @@
-import { ISearchRequest } from '@/pages/MainPage/store/slice';
+import {
+	ISearchRequest,
+	updateSearchRequest,
+} from '@/pages/MainPage/store/slice';
+import { debounce } from '@/shared/helpers/debounce';
+import { useAppDispatch } from '@/shared/hooks/storeHooks';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styles from './SearchInput.module.css';
 export default function SearchInput({
 	searchRequest,
@@ -11,6 +16,8 @@ export default function SearchInput({
 }) {
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [isActive, setIsActive] = useState<boolean>(false);
+	const debouncedUpdateRequest = useCallback(debounce(updateRequest, 600), []);
+	const dispatch = useAppDispatch();
 	return (
 		<div
 			className={classNames(
@@ -41,7 +48,16 @@ export default function SearchInput({
 				type='text'
 				className={styles.input}
 				value={searchRequest.title}
-				onChange={evt => updateRequest(evt.target.value)}
+				placeholder={'Название фильма'}
+				onChange={evt => {
+					dispatch(
+						updateSearchRequest({
+							...searchRequest,
+							title: evt.target.value,
+						})
+					);
+					debouncedUpdateRequest(evt.target.value);
+				}}
 			></input>
 			{searchRequest.title && searchRequest.title.length > 0 && (
 				<button

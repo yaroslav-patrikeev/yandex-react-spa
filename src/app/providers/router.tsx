@@ -1,6 +1,6 @@
+import FilmPage from '@/pages/FilmPage/ui/FilmPage';
+import MainPage from '@/pages/MainPage/ui/MainPage';
 import { createBrowserRouter } from 'react-router-dom';
-import { FilmPage } from '../../pages/FilmPage';
-import { MainPage } from '../../pages/MainPage';
 import LayoutApp from '../ui/LayoutApp';
 
 export const router = createBrowserRouter([

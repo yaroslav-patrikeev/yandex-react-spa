@@ -1,0 +1,62 @@
+.carouselWrapper {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.carousel {
+	display: flex;
+	gap: 24px;
+	transition: transform 0.4s ease-in-out;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.photo {
+	width: 160px;
+	height: 228.57px;
+	border-radius: 8px;
+}
+.name {
+	font-size: 14px;
+	line-height: 20px;
+	margin: 0;
+}
+
+.next {
+	position: absolute;
+	top: calc(50% - 24px);
+	right: 4px;
+	width: 48px;
+	height: 48px;
+	border: 0;
+	background-color: var(--fill-light);
+	background-image: url('../../assets/icons/arrowRight.svg');
+	background-size: 32px 32px;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+	filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}
+
+.back {
+	position: absolute;
+	top: calc(50% - 24px);
+	left: 4px;
+	width: 48px;
+	height: 48px;
+	border: 0;
+	background-color: var(--fill-light);
+	z-index: 2;
+	background-image: url('../../assets/icons/arrowRight.svg');
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	transform: rotate(180deg);
+	background-position: center;
+	border-radius: 50%;
+	filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+}

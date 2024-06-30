@@ -4,14 +4,21 @@ import Search from '@/features/Search/Search.tsx';
 import SetFilters from '@/features/SetFilters/SetFilters';
 import { useLazySearchRequestQuery } from '@/shared/api/api';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/storeHooks';
+import FilmsNotFound from '@/widgets/FIlmsNotFound/FilmsNotFound';
 import {
 	FilterType,
 	GenreKeys,
 	YearKeys,
 } from '@/widgets/Filter/constants/constants';
+import Loading from '@/widgets/Loading/Loading';
 import TicketCard from '@/widgets/TicketCard/ui/TicketCard';
 import React, { useEffect } from 'react';
-import { updateSearchRequest, updateSearchResponse } from '../store/slice';
+import {
+	setIsLoad,
+	setRating,
+	updateSearchRequest,
+	updateSearchResponse,
+} from '../store/slice';
 import styles from './MainPage.module.css';
 
 export default function MainPage() {
@@ -24,8 +31,12 @@ export default function MainPage() {
 	const searchRequest = useAppSelector(
 		(state: RootState) => state.main.searchRequest
 	);
+
+	const isLoad = useAppSelector((state: RootState) => state.main.isLoading);
+
 	const dispatch = useAppDispatch();
-	const [getFilms, { data, isFetching }] = useLazySearchRequestQuery();
+	const [getFilms, { data, isFetching, isLoading, isError }] =
+		useLazySearchRequestQuery();
 
 	useEffect(() => {
 		const currentQueryParameters = window.location.search.slice(1).split('&');
@@ -55,6 +66,23 @@ export default function MainPage() {
 	}, [getFilms, pageNumber, dispatch]);
 
 	useEffect(() => {
+		const currentRating = localStorage.getItem('rating');
+		if (currentRating) {
+			for (const [key, value] of Object.entries(JSON.parse(currentRating))) {
+				dispatch(setRating({ id: key, rating: Number(value) }));
+			}
+		}
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(setIsLoad(isLoading));
+	}, [dispatch, isLoading]);
+
+	useEffect(() => {
+		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+	}, [isError]);
+
+	useEffect(() => {
 		if (data && !isFetching) {
 			dispatch(
 				updateSearchResponse(
@@ -68,17 +96,29 @@ export default function MainPage() {
 	}, [data, isFetching, dispatch]);
 
 	return (
-		<>
+		<main className={styles.mainPage}>
 			<SetFilters />
 			<section className={styles.searchResult}>
 				<Search />
-				{searchResponse.search_result.map(film => (
-					<React.Fragment key={film.id}>
-						<TicketCard {...film} />
-					</React.Fragment>
-				))}
-				<Pagination />
+				{isLoad ? (
+					<Loading />
+				) : (
+					<>
+						{searchResponse.search_result.length > 0 ? (
+							<>
+								{searchResponse.search_result.map(film => (
+									<React.Fragment key={film.id}>
+										<TicketCard {...film} />
+									</React.Fragment>
+								))}
+								<Pagination />
+							</>
+						) : (
+							<FilmsNotFound />
+						)}
+					</>
+				)}
 			</section>
-		</>
+		</main>
 	);
 }

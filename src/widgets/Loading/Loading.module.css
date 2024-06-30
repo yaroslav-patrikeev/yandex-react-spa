@@ -1,0 +1,21 @@
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	display: flex;
+	justify-content: center;
+	margin-top: 300px;
+}
+
+.image {
+	animation-name: rotation;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}

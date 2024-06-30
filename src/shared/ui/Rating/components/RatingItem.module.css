@@ -1,9 +1,8 @@
 .passiveStar {
-	background-image: url('../../../assets/icons/star.svg');
 }
 
 .activeStar {
-	background-image: url('../../../assets/icons/activeStar.svg');
+	fill: blue;
 }
 
 .item {
@@ -31,5 +30,4 @@
 }
 
 .hoverStar {
-	background-image: url('../../../assets/icons/hoverStar.svg');
 }
