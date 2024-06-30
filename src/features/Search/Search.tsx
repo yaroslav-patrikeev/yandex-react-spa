@@ -21,7 +21,9 @@ export default function Search() {
 	const [getData, { isLoading, isError }] = useLazySearchRequestQuery();
 
 	useEffect(() => {
-		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		if (isError) {
+			console.error('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		}
 	}, [isError]);
 
 	useEffect(() => {
@@ -31,7 +33,7 @@ export default function Search() {
 	return (
 		<SearchInput
 			searchRequest={searchRequest}
-			updateRequest={(str: string) => {
+			updateRequest={(str: unknown) => {
 				const newRequest: Record<string, string> = {};
 				for (const [key, value] of Object.entries(searchRequest)) {
 					if (key !== 'title') {
@@ -43,7 +45,7 @@ export default function Search() {
 					str
 						? {
 								...newRequest,
-								title: str,
+								title: str as string,
 						  }
 						: {
 								...newRequest,

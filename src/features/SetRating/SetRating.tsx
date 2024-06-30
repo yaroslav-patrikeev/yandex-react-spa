@@ -1,17 +1,22 @@
-import { useSetRatingMutation } from '@/shared/api/api';
 import RatingItem from '@/shared/ui/Rating/components/RatingItem';
-import { useEffect } from 'react';
+import { memo } from 'react';
 
 interface ISetRating {
 	id: string;
 	index: number;
+	sendRequest: ({
+		movieId,
+		user_rate,
+		token,
+	}: {
+		movieId: string;
+		user_rate: number;
+		token: string | null;
+	}) => void;
 }
-export default function SetRating(params: ISetRating) {
-	const { id, index } = params;
-	const [sendRequest, { isError }] = useSetRatingMutation();
-	useEffect(() => {
-		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
-	}, [isError]);
+export default memo(function SetRating(params: ISetRating) {
+	const { id, index, sendRequest } = params;
+
 	return (
 		<RatingItem
 			id={id}
@@ -32,4 +37,4 @@ export default function SetRating(params: ISetRating) {
 			}}
 		/>
 	);
-}
+});

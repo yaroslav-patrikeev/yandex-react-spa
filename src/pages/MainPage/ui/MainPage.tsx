@@ -79,7 +79,9 @@ export default function MainPage() {
 	}, [dispatch, isLoading]);
 
 	useEffect(() => {
-		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		if (isError) {
+			alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		}
 	}, [isError]);
 
 	useEffect(() => {

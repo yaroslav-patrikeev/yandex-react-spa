@@ -30,7 +30,9 @@ export default function SetFilters() {
 	}, [dispatch, isLoading]);
 
 	useEffect(() => {
-		alert('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		if (isError) {
+			console.error('Возникла ошибка. Попробуйте перезагрузить страницу.');
+		}
 	}, [isError]);
 
 	const sendToStore = (param: { filterType: string; value: string }) => {

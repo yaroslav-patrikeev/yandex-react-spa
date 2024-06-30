@@ -1,30 +1,76 @@
-# React + TypeScript + Vite
+# Неделя Реакта
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Привет, коллега! Ниже собрал небольшое саммари по работе и руководство по раскатке.
 
-Currently, two official plugins are available:
+## SPA
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Клонировать репозиторий
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+git clone git@github.com:yaroslav-patrikeev/yandex-react-spa.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Установить зависимости
+
+```
+npm ci
+```
+
+- Использую глобальную переменную vite для url сервера. При необходимости можно поменять в vite.config.ts и запустить сервера
+
+```
+__API_URL__: JSON.stringify('http://localhost:3030')
+```
+
+- Запустить приложение
+
+```
+npm run dev
+```
+
+### Результаты
+
+- Верстка в целом соответствует дизайн-макетам. Использовал глобальные переменные и модульные стили css. Старался обращать внимание на семантику тегов. Использовал алиасы для удобства импортов.
+
+* Реализовал все необходимые ui-компоненты. Карусель можно проверить только массивом моковых данных, т. к. компонент завязан на длине пришедшего массива актеров.
+* Использую Feature-Sliced Design.
+* Шапка позиционирована липко.
+* Модальное окно сделано при помощи портала в body
+* Работа с токеном выполнена с помощью thunk ./src/entities/User/services/
+* Токен сохраняется в localStorage ("token")
+* Реализован logout с удалением из localStorage и стора.
+* При инициализации приложения проверяется наличие токена в localStorage.
+* Поиск работает через функцию debounce, есть возможность очистить поле.
+* Фильтры сохраняются в query-params и проверяются при инициализации приложения. Изменение любого фильтра перерисовывает фильмы и сбрасывает номер страницы до единицы.
+* Реализовал список фильмов с пагинацией. Кнопки пагинации правильно дисейблятся, в нужный момент сбрасываются или исчезают.
+* Данные на странице фильма получаю по id.
+* Оценить фильм может только авторизованный пользователь на странице фильмов и фильма. Оценка проходит через debounce. После оценки на странице фильма обновляется кеш запроса по id, реализовал с помощью тегов rtk query. Оценка сохраняется в localStorage.
+* Все ошибки обрабатываются выводом в консоль по состоянию isError.
+* Лоадер и страница not found для фильмов реализована.
+* Использую rtk для хранения объектов запроса, ответа, номера страницы и т. д., использую rtk query для всех запросов и thunk для авторизации.
+* Архитектуру приложения старался делать максимально осмысленно, но местами упрощая и оставляя поле для дальнейшего рефакторинга
+
+## Next
+
+- Приложение на Next.js лежит в этом же репозитории в ветке next.
+
+```
+git checkout next
+```
+
+- Устанавливаем зависимости и запускаем
+
+```
+npm ci
+npm run dev
+```
+
+- Использую для хранения url сервера файл env.ts в корне.
+
+### Результаты
+
+- Перенес основную архитектуру на Next, почти не меняя логику. Папка pages ушла в app.
+- Использовал динамический роутинг.
+- Обернул все клиентским провайдером для rtk.
+- Заменил изображения на компонент Image с фиксированной шириной и высотой. Для постеров фильмов в ленте отметил параметр ленивой загрузки.
+- Фильтры реализованы также с помощью query параметров

@@ -2,7 +2,7 @@ import {
 	ISearchRequest,
 	updateSearchRequest,
 } from '@/pages/MainPage/store/slice';
-import { debounce } from '@/shared/helpers/debounce';
+import { debounce } from '@/shared/helpers/debounce.ts';
 import { useAppDispatch } from '@/shared/hooks/storeHooks';
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
@@ -12,7 +12,7 @@ export default function SearchInput({
 	updateRequest,
 }: {
 	searchRequest: ISearchRequest;
-	updateRequest: (str: string) => void;
+	updateRequest: (str: unknown) => void;
 }) {
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [isActive, setIsActive] = useState<boolean>(false);
@@ -64,6 +64,12 @@ export default function SearchInput({
 					className={styles.closeIcon}
 					onClick={() => {
 						updateRequest('');
+						dispatch(
+							updateSearchRequest({
+								...searchRequest,
+								title: '',
+							})
+						);
 						setIsActive(false);
 					}}
 				></button>
